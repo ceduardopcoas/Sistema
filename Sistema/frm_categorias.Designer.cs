@@ -129,6 +129,7 @@
             // 
             // txt_categoria
             // 
+            this.txt_categoria.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Descricao", true));
             this.txt_categoria.Location = new System.Drawing.Point(107, 57);
             this.txt_categoria.Margin = new System.Windows.Forms.Padding(4);
             this.txt_categoria.Name = "txt_categoria";

@@ -32,23 +32,75 @@ namespace Sistema
 
         private void Btn_cadastrar_Click(object sender, EventArgs e)
         {
-            this.categoriaBindingSource.EndEdit();
-            DataContextFactory.DataContext.SubmitChanges();
-            MessageBox.Show("Categoria inserida com sucesso!");
+            if (this.Valida())
+            {
+                this.categoriaBindingSource.EndEdit();
+                DataContextFactory.DataContext.SubmitChanges();
+                MessageBox.Show("Categoria inserida com sucesso!");
+            }
+           
 
+        }
+
+        private bool Valida()
+        {
+            if (txt_categoria.Text.Trim() == string.Empty )
+            {
+                MessageBox.Show("O campo categoria eh obrigatorio");
+                txt_categoria.Focus();
+                return false;
+            }
+            return true;
         }
 
         private void Btn_excluir_Click(object sender, EventArgs e)
         {
-            this.categoriaBindingSource.RemoveCurrent();
-            DataContextFactory.DataContext.SubmitChanges();
-            MessageBox.Show("Categoria excluida com sucesso!");
+            if (MessageBox.Show("Tem certeza","Confirmacao",MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (this.CategoriaPossuiProduto(this.categoriaAtual))
+                {
+                    MessageBox.Show("Voce nao pode excluir categoria, pq existe produtos nela");
+                }
+                else
+                {
+                    this.categoriaBindingSource.RemoveCurrent();
+                    DataContextFactory.DataContext.SubmitChanges();
+                    MessageBox.Show("Categoria excluida com sucesso!");
+                }
+            }
+            else
+            {
+                this.categoriaBindingSource.CancelEdit();
+            }
+            
         }
 
         private void Btn_cancelar_Click(object sender, EventArgs e)
         {
             this.categoriaBindingSource.CancelEdit();
 
+        }
+
+
+        public Categoria categoriaAtual
+        {
+            get
+            {
+                return (Categoria)this.categoriaBindingSource.Current;
+            }
+        }
+
+        private bool CategoriaPossuiProduto(Categoria categoria)
+        {
+            var produtos = DataContextFactory.DataContext.Produto.Where(x => x.CodigoCategoria == categoria.Codigo);
+            if (produtos.Count() > 0 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
