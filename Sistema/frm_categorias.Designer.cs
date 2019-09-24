@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descricaoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.btn_excluir = new System.Windows.Forms.Button();
             this.btn_cadastrar = new System.Windows.Forms.Button();
             this.btn_novo = new System.Windows.Forms.Button();
             this.txt_categoria = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.idcategoriaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desccategoriaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -50,8 +50,8 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigoDataGridViewTextBoxColumn,
-            this.descricaoDataGridViewTextBoxColumn});
+            this.idcategoriaDataGridViewTextBoxColumn,
+            this.desccategoriaDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.categoriaBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(16, 197);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
@@ -60,28 +60,6 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(467, 162);
             this.dataGridView1.TabIndex = 21;
-            // 
-            // codigoDataGridViewTextBoxColumn
-            // 
-            this.codigoDataGridViewTextBoxColumn.DataPropertyName = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
-            this.codigoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
-            this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.codigoDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // descricaoDataGridViewTextBoxColumn
-            // 
-            this.descricaoDataGridViewTextBoxColumn.DataPropertyName = "Descricao";
-            this.descricaoDataGridViewTextBoxColumn.HeaderText = "Descricao";
-            this.descricaoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.descricaoDataGridViewTextBoxColumn.Name = "descricaoDataGridViewTextBoxColumn";
-            this.descricaoDataGridViewTextBoxColumn.ReadOnly = true;
-            this.descricaoDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // categoriaBindingSource
-            // 
-            this.categoriaBindingSource.DataSource = typeof(Sistema.DAL.Categoria);
             // 
             // btn_cancelar
             // 
@@ -129,7 +107,7 @@
             // 
             // txt_categoria
             // 
-            this.txt_categoria.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "Descricao", true));
+            this.txt_categoria.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.categoriaBindingSource, "desc_categoria", true));
             this.txt_categoria.Location = new System.Drawing.Point(107, 57);
             this.txt_categoria.Margin = new System.Windows.Forms.Padding(4);
             this.txt_categoria.Name = "txt_categoria";
@@ -146,6 +124,28 @@
             this.label1.Size = new System.Drawing.Size(91, 20);
             this.label1.TabIndex = 11;
             this.label1.Text = "Categoria: ";
+            // 
+            // idcategoriaDataGridViewTextBoxColumn
+            // 
+            this.idcategoriaDataGridViewTextBoxColumn.DataPropertyName = "id_categoria";
+            this.idcategoriaDataGridViewTextBoxColumn.HeaderText = "id_categoria";
+            this.idcategoriaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idcategoriaDataGridViewTextBoxColumn.Name = "idcategoriaDataGridViewTextBoxColumn";
+            this.idcategoriaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idcategoriaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // desccategoriaDataGridViewTextBoxColumn
+            // 
+            this.desccategoriaDataGridViewTextBoxColumn.DataPropertyName = "desc_categoria";
+            this.desccategoriaDataGridViewTextBoxColumn.HeaderText = "desc_categoria";
+            this.desccategoriaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.desccategoriaDataGridViewTextBoxColumn.Name = "desccategoriaDataGridViewTextBoxColumn";
+            this.desccategoriaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.desccategoriaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // categoriaBindingSource
+            // 
+            this.categoriaBindingSource.DataSource = typeof(Sistema.DAL.categoria);
             // 
             // frm_categorias
             // 
@@ -180,10 +180,9 @@
         private System.Windows.Forms.Button btn_novo;
         private System.Windows.Forms.TextBox txt_categoria;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descricaoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idcategoriaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desccategoriaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource categoriaBindingSource;
-        //private System.Windows.Forms.BindingSource categoriaBindingSource;
-        //private System.Windows.Forms.BindingSource categoriaBindingSource1;
+
     }
 }

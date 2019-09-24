@@ -53,6 +53,12 @@
     <Compile Include="frm_categorias.Designer.cs">
       <DependentUpon>frm_categorias.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_consultaProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_consultaProdutos.Designer.cs">
+      <DependentUpon>frm_consultaProdutos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,16 +71,28 @@
     <Compile Include="frm_produtos.Designer.cs">
       <DependentUpon>frm_produtos.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_venda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_venda.Designer.cs">
+      <DependentUpon>frm_venda.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frm_categorias.resx">
       <DependentUpon>frm_categorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_consultaProdutos.resx">
+      <DependentUpon>frm_consultaProdutos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_menu.resx">
       <DependentUpon>frm_menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_produtos.resx">
       <DependentUpon>frm_produtos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_venda.resx">
+      <DependentUpon>frm_venda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,8 +104,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\DataSources\Sistema.DAL.Categoria.datasource" />
-    <None Include="Properties\DataSources\sistema.dall.Categoria.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.categoria1.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.categoria2.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.categoria3.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.categoria4.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.categoria5.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.produto1.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.produto2.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.produto3.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.produto4.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.tb_itens_venda.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.tb_pessoa.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.tb_usuario.datasource" />
+    <None Include="Properties\DataSources\Sistema.DAL.tb_venda.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -112,6 +141,9 @@
       <Project>{c70182b1-7a1c-4c8a-a08a-47911159cee9}</Project>
       <Name>Sistema.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fundo sistema1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

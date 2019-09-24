@@ -34,5 +34,31 @@ namespace Sistema
 
             frm.Show();
         }
+
+        private void ProdutosCategoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_consultaProdutos frm = new frm_consultaProdutos();
+
+            frm.Show();
+        }
+
+        private void CategoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_categorias frm = new frm_categorias();
+
+            frm.Show();
+        }
+
+        private void ProdutosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_produtos frm = new frm_produtos();
+            frm.Show();
+        }
+
+        private void VendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm_venda frm = new frm_venda();
+            frm.Show();
+        }
     }
 }

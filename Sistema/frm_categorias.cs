@@ -22,7 +22,7 @@ namespace Sistema
 
         private void Frm_categorias_Load(object sender, EventArgs e)
         {
-            this.categoriaBindingSource.DataSource = DataContextFactory.DataContext.Categoria;
+            this.categoriaBindingSource.DataSource = DataContextFactory.DataContext.categoria;
         }
 
         private void Btn_novo_Click(object sender, EventArgs e)
@@ -38,13 +38,13 @@ namespace Sistema
                 DataContextFactory.DataContext.SubmitChanges();
                 MessageBox.Show("Categoria inserida com sucesso!");
             }
-           
+
 
         }
 
         private bool Valida()
         {
-            if (txt_categoria.Text.Trim() == string.Empty )
+            if (txt_categoria.Text.Trim() == string.Empty)
             {
                 MessageBox.Show("O campo categoria eh obrigatorio");
                 txt_categoria.Focus();
@@ -55,7 +55,7 @@ namespace Sistema
 
         private void Btn_excluir_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Tem certeza","Confirmacao",MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Tem certeza", "Confirmacao", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (this.CategoriaPossuiProduto(this.categoriaAtual))
                 {
@@ -72,7 +72,7 @@ namespace Sistema
             {
                 this.categoriaBindingSource.CancelEdit();
             }
-            
+
         }
 
         private void Btn_cancelar_Click(object sender, EventArgs e)
@@ -82,18 +82,18 @@ namespace Sistema
         }
 
 
-        public Categoria categoriaAtual
+        public categoria categoriaAtual
         {
             get
             {
-                return (Categoria)this.categoriaBindingSource.Current;
+                return (categoria)this.categoriaBindingSource.Current;
             }
         }
 
-        private bool CategoriaPossuiProduto(Categoria categoria)
+        private bool CategoriaPossuiProduto(categoria Categoria)
         {
-            var produtos = DataContextFactory.DataContext.Produto.Where(x => x.CodigoCategoria == categoria.Codigo);
-            if (produtos.Count() > 0 )
+            var produtos = DataContextFactory.DataContext.produto.Where(x => x.id_categoria == Categoria.id_categoria);
+            if (produtos.Count() > 0)
             {
                 return true;
             }

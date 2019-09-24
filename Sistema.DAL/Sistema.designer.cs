@@ -30,12 +30,24 @@ namespace Sistema.DAL
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnCreated();
-    partial void InsertCategoria(Categoria instance);
-    partial void UpdateCategoria(Categoria instance);
-    partial void DeleteCategoria(Categoria instance);
-    partial void InsertProduto(Produto instance);
-    partial void UpdateProduto(Produto instance);
-    partial void DeleteProduto(Produto instance);
+    partial void Insertproduto(produto instance);
+    partial void Updateproduto(produto instance);
+    partial void Deleteproduto(produto instance);
+    partial void Insertcategoria(categoria instance);
+    partial void Updatecategoria(categoria instance);
+    partial void Deletecategoria(categoria instance);
+    partial void Inserttb_pessoa(tb_pessoa instance);
+    partial void Updatetb_pessoa(tb_pessoa instance);
+    partial void Deletetb_pessoa(tb_pessoa instance);
+    partial void Inserttb_itens_venda(tb_itens_venda instance);
+    partial void Updatetb_itens_venda(tb_itens_venda instance);
+    partial void Deletetb_itens_venda(tb_itens_venda instance);
+    partial void Inserttb_venda(tb_venda instance);
+    partial void Updatetb_venda(tb_venda instance);
+    partial void Deletetb_venda(tb_venda instance);
+    partial void Inserttb_usuario(tb_usuario instance);
+    partial void Updatetb_usuario(tb_usuario instance);
+    partial void Deletetb_usuario(tb_usuario instance);
     #endregion
 		
 		public SistemaDataContext() : 
@@ -68,101 +80,222 @@ namespace Sistema.DAL
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Categoria> Categoria
+		public System.Data.Linq.Table<produto> produto
 		{
 			get
 			{
-				return this.GetTable<Categoria>();
+				return this.GetTable<produto>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Produto> Produto
+		public System.Data.Linq.Table<categoria> categoria
 		{
 			get
 			{
-				return this.GetTable<Produto>();
+				return this.GetTable<categoria>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_pessoa> tb_pessoa
+		{
+			get
+			{
+				return this.GetTable<tb_pessoa>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_itens_venda> tb_itens_venda
+		{
+			get
+			{
+				return this.GetTable<tb_itens_venda>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_venda> tb_venda
+		{
+			get
+			{
+				return this.GetTable<tb_venda>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tb_usuario> tb_usuario
+		{
+			get
+			{
+				return this.GetTable<tb_usuario>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_categoria")]
-	public partial class Categoria : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.produto")]
+	public partial class produto : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Codigo;
+		private int _id_produto;
 		
-		private string _Descricao;
+		private string _desc_produto;
 		
-		private EntitySet<Produto> _Produto;
+		private System.Nullable<decimal> _valor;
+		
+		private System.Nullable<int> _id_categoria;
+		
+		private EntitySet<tb_itens_venda> _tb_itens_venda;
+		
+		private EntityRef<categoria> _categoria;
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCodigoChanging(int value);
-    partial void OnCodigoChanged();
-    partial void OnDescricaoChanging(string value);
-    partial void OnDescricaoChanged();
+    partial void Onid_produtoChanging(int value);
+    partial void Onid_produtoChanged();
+    partial void Ondesc_produtoChanging(string value);
+    partial void Ondesc_produtoChanged();
+    partial void OnvalorChanging(System.Nullable<decimal> value);
+    partial void OnvalorChanged();
+    partial void Onid_categoriaChanging(System.Nullable<int> value);
+    partial void Onid_categoriaChanged();
     #endregion
 		
-		public Categoria()
+		public produto()
 		{
-			this._Produto = new EntitySet<Produto>(new Action<Produto>(this.attach_Produto), new Action<Produto>(this.detach_Produto));
+			this._tb_itens_venda = new EntitySet<tb_itens_venda>(new Action<tb_itens_venda>(this.attach_tb_itens_venda), new Action<tb_itens_venda>(this.detach_tb_itens_venda));
+			this._categoria = default(EntityRef<categoria>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_categoria", Storage="_Codigo", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Codigo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_produto", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_produto
 		{
 			get
 			{
-				return this._Codigo;
+				return this._id_produto;
 			}
 			set
 			{
-				if ((this._Codigo != value))
+				if ((this._id_produto != value))
 				{
-					this.OnCodigoChanging(value);
+					this.Onid_produtoChanging(value);
 					this.SendPropertyChanging();
-					this._Codigo = value;
-					this.SendPropertyChanged("Codigo");
-					this.OnCodigoChanged();
+					this._id_produto = value;
+					this.SendPropertyChanged("id_produto");
+					this.Onid_produtoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="desc_categoria", Storage="_Descricao", DbType="NVarChar(50)")]
-		public string Descricao
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_desc_produto", DbType="NVarChar(50)")]
+		public string desc_produto
 		{
 			get
 			{
-				return this._Descricao;
+				return this._desc_produto;
 			}
 			set
 			{
-				if ((this._Descricao != value))
+				if ((this._desc_produto != value))
 				{
-					this.OnDescricaoChanging(value);
+					this.Ondesc_produtoChanging(value);
 					this.SendPropertyChanging();
-					this._Descricao = value;
-					this.SendPropertyChanged("Descricao");
-					this.OnDescricaoChanged();
+					this._desc_produto = value;
+					this.SendPropertyChanged("desc_produto");
+					this.Ondesc_produtoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Categoria_Produto", Storage="_Produto", ThisKey="Codigo", OtherKey="CodigoCategoria")]
-		public EntitySet<Produto> Produto
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_valor", DbType="Decimal(25,2)")]
+		public System.Nullable<decimal> valor
 		{
 			get
 			{
-				return this._Produto;
+				return this._valor;
 			}
 			set
 			{
-				this._Produto.Assign(value);
+				if ((this._valor != value))
+				{
+					this.OnvalorChanging(value);
+					this.SendPropertyChanging();
+					this._valor = value;
+					this.SendPropertyChanged("valor");
+					this.OnvalorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_categoria", DbType="Int")]
+		public System.Nullable<int> id_categoria
+		{
+			get
+			{
+				return this._id_categoria;
+			}
+			set
+			{
+				if ((this._id_categoria != value))
+				{
+					if (this._categoria.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_categoriaChanging(value);
+					this.SendPropertyChanging();
+					this._id_categoria = value;
+					this.SendPropertyChanged("id_categoria");
+					this.Onid_categoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="produto_tb_itens_venda", Storage="_tb_itens_venda", ThisKey="id_produto", OtherKey="id_produto")]
+		public EntitySet<tb_itens_venda> tb_itens_venda
+		{
+			get
+			{
+				return this._tb_itens_venda;
+			}
+			set
+			{
+				this._tb_itens_venda.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="categoria_produto", Storage="_categoria", ThisKey="id_categoria", OtherKey="id_categoria", IsForeignKey=true)]
+		public categoria categoria
+		{
+			get
+			{
+				return this._categoria.Entity;
+			}
+			set
+			{
+				categoria previousValue = this._categoria.Entity;
+				if (((previousValue != value) 
+							|| (this._categoria.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._categoria.Entity = null;
+						previousValue.produto.Remove(this);
+					}
+					this._categoria.Entity = value;
+					if ((value != null))
+					{
+						value.produto.Add(this);
+						this._id_categoria = value.id_categoria;
+					}
+					else
+					{
+						this._id_categoria = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("categoria");
+				}
 			}
 		}
 		
@@ -186,165 +319,847 @@ namespace Sistema.DAL
 			}
 		}
 		
-		private void attach_Produto(Produto entity)
+		private void attach_tb_itens_venda(tb_itens_venda entity)
 		{
 			this.SendPropertyChanging();
-			entity.Categoria = this;
+			entity.produto = this;
 		}
 		
-		private void detach_Produto(Produto entity)
+		private void detach_tb_itens_venda(tb_itens_venda entity)
 		{
 			this.SendPropertyChanging();
-			entity.Categoria = null;
+			entity.produto = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_produto")]
-	public partial class Produto : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.categoria")]
+	public partial class categoria : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Codigo;
+		private int _id_categoria;
 		
-		private string _Descricao;
+		private string _desc_categoria;
 		
-		private System.Nullable<decimal> _Valor;
-		
-		private System.Nullable<int> _CodigoCategoria;
-		
-		private EntityRef<Categoria> _Categoria;
+		private EntitySet<produto> _produto;
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCodigoChanging(int value);
-    partial void OnCodigoChanged();
-    partial void OnDescricaoChanging(string value);
-    partial void OnDescricaoChanged();
-    partial void OnValorChanging(System.Nullable<decimal> value);
-    partial void OnValorChanged();
-    partial void OnCodigoCategoriaChanging(System.Nullable<int> value);
-    partial void OnCodigoCategoriaChanged();
+    partial void Onid_categoriaChanging(int value);
+    partial void Onid_categoriaChanged();
+    partial void Ondesc_categoriaChanging(string value);
+    partial void Ondesc_categoriaChanged();
     #endregion
 		
-		public Produto()
+		public categoria()
 		{
-			this._Categoria = default(EntityRef<Categoria>);
+			this._produto = new EntitySet<produto>(new Action<produto>(this.attach_produto), new Action<produto>(this.detach_produto));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_produto", Storage="_Codigo", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Codigo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_categoria", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_categoria
 		{
 			get
 			{
-				return this._Codigo;
+				return this._id_categoria;
 			}
 			set
 			{
-				if ((this._Codigo != value))
+				if ((this._id_categoria != value))
 				{
-					this.OnCodigoChanging(value);
+					this.Onid_categoriaChanging(value);
 					this.SendPropertyChanging();
-					this._Codigo = value;
-					this.SendPropertyChanged("Codigo");
-					this.OnCodigoChanged();
+					this._id_categoria = value;
+					this.SendPropertyChanged("id_categoria");
+					this.Onid_categoriaChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="desc_produto", Storage="_Descricao", DbType="NVarChar(50)")]
-		public string Descricao
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_desc_categoria", DbType="NVarChar(50)")]
+		public string desc_categoria
 		{
 			get
 			{
-				return this._Descricao;
+				return this._desc_categoria;
 			}
 			set
 			{
-				if ((this._Descricao != value))
+				if ((this._desc_categoria != value))
 				{
-					this.OnDescricaoChanging(value);
+					this.Ondesc_categoriaChanging(value);
 					this.SendPropertyChanging();
-					this._Descricao = value;
-					this.SendPropertyChanged("Descricao");
-					this.OnDescricaoChanged();
+					this._desc_categoria = value;
+					this.SendPropertyChanged("desc_categoria");
+					this.Ondesc_categoriaChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="valor", Storage="_Valor", DbType="Decimal(25,2)")]
-		public System.Nullable<decimal> Valor
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="categoria_produto", Storage="_produto", ThisKey="id_categoria", OtherKey="id_categoria")]
+		public EntitySet<produto> produto
 		{
 			get
 			{
-				return this._Valor;
+				return this._produto;
 			}
 			set
 			{
-				if ((this._Valor != value))
+				this._produto.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_produto(produto entity)
+		{
+			this.SendPropertyChanging();
+			entity.categoria = this;
+		}
+		
+		private void detach_produto(produto entity)
+		{
+			this.SendPropertyChanging();
+			entity.categoria = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_pessoa")]
+	public partial class tb_pessoa : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_pessoa;
+		
+		private string _nome;
+		
+		private string _telefone;
+		
+		private string _email;
+		
+		private EntitySet<tb_venda> _tb_venda;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_pessoaChanging(int value);
+    partial void Onid_pessoaChanged();
+    partial void OnnomeChanging(string value);
+    partial void OnnomeChanged();
+    partial void OntelefoneChanging(string value);
+    partial void OntelefoneChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    #endregion
+		
+		public tb_pessoa()
+		{
+			this._tb_venda = new EntitySet<tb_venda>(new Action<tb_venda>(this.attach_tb_venda), new Action<tb_venda>(this.detach_tb_venda));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_pessoa", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_pessoa
+		{
+			get
+			{
+				return this._id_pessoa;
+			}
+			set
+			{
+				if ((this._id_pessoa != value))
 				{
-					this.OnValorChanging(value);
+					this.Onid_pessoaChanging(value);
 					this.SendPropertyChanging();
-					this._Valor = value;
-					this.SendPropertyChanged("Valor");
-					this.OnValorChanged();
+					this._id_pessoa = value;
+					this.SendPropertyChanged("id_pessoa");
+					this.Onid_pessoaChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_categoria", Storage="_CodigoCategoria", DbType="Int")]
-		public System.Nullable<int> CodigoCategoria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nome", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string nome
 		{
 			get
 			{
-				return this._CodigoCategoria;
+				return this._nome;
 			}
 			set
 			{
-				if ((this._CodigoCategoria != value))
+				if ((this._nome != value))
 				{
-					this.OnCodigoCategoriaChanging(value);
+					this.OnnomeChanging(value);
 					this.SendPropertyChanging();
-					this._CodigoCategoria = value;
-					this.SendPropertyChanged("CodigoCategoria");
-					this.OnCodigoCategoriaChanged();
+					this._nome = value;
+					this.SendPropertyChanged("nome");
+					this.OnnomeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Categoria_Produto", Storage="_Categoria", ThisKey="CodigoCategoria", OtherKey="Codigo", IsForeignKey=true)]
-		public Categoria Categoria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telefone", DbType="VarChar(30)")]
+		public string telefone
 		{
 			get
 			{
-				return this._Categoria.Entity;
+				return this._telefone;
 			}
 			set
 			{
-				Categoria previousValue = this._Categoria.Entity;
+				if ((this._telefone != value))
+				{
+					this.OntelefoneChanging(value);
+					this.SendPropertyChanging();
+					this._telefone = value;
+					this.SendPropertyChanged("telefone");
+					this.OntelefoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(200)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_pessoa_tb_venda", Storage="_tb_venda", ThisKey="id_pessoa", OtherKey="id_pessoa")]
+		public EntitySet<tb_venda> tb_venda
+		{
+			get
+			{
+				return this._tb_venda;
+			}
+			set
+			{
+				this._tb_venda.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tb_venda(tb_venda entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb_pessoa = this;
+		}
+		
+		private void detach_tb_venda(tb_venda entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb_pessoa = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_itens_venda")]
+	public partial class tb_itens_venda : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _quantidade;
+		
+		private int _id_produto;
+		
+		private int _id_venda;
+		
+		private decimal _valor;
+		
+		private int _id_item;
+		
+		private EntityRef<produto> _produto;
+		
+		private EntityRef<tb_venda> _tb_venda;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnquantidadeChanging(int value);
+    partial void OnquantidadeChanged();
+    partial void Onid_produtoChanging(int value);
+    partial void Onid_produtoChanged();
+    partial void Onid_vendaChanging(int value);
+    partial void Onid_vendaChanged();
+    partial void OnvalorChanging(decimal value);
+    partial void OnvalorChanged();
+    partial void Onid_itemChanging(int value);
+    partial void Onid_itemChanged();
+    #endregion
+		
+		public tb_itens_venda()
+		{
+			this._produto = default(EntityRef<produto>);
+			this._tb_venda = default(EntityRef<tb_venda>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_quantidade", DbType="Int NOT NULL")]
+		public int quantidade
+		{
+			get
+			{
+				return this._quantidade;
+			}
+			set
+			{
+				if ((this._quantidade != value))
+				{
+					this.OnquantidadeChanging(value);
+					this.SendPropertyChanging();
+					this._quantidade = value;
+					this.SendPropertyChanged("quantidade");
+					this.OnquantidadeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_produto", DbType="Int NOT NULL")]
+		public int id_produto
+		{
+			get
+			{
+				return this._id_produto;
+			}
+			set
+			{
+				if ((this._id_produto != value))
+				{
+					if (this._produto.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_produtoChanging(value);
+					this.SendPropertyChanging();
+					this._id_produto = value;
+					this.SendPropertyChanged("id_produto");
+					this.Onid_produtoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_venda", DbType="Int NOT NULL")]
+		public int id_venda
+		{
+			get
+			{
+				return this._id_venda;
+			}
+			set
+			{
+				if ((this._id_venda != value))
+				{
+					if (this._tb_venda.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_vendaChanging(value);
+					this.SendPropertyChanging();
+					this._id_venda = value;
+					this.SendPropertyChanged("id_venda");
+					this.Onid_vendaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_valor", DbType="Decimal(15,2) NOT NULL")]
+		public decimal valor
+		{
+			get
+			{
+				return this._valor;
+			}
+			set
+			{
+				if ((this._valor != value))
+				{
+					this.OnvalorChanging(value);
+					this.SendPropertyChanging();
+					this._valor = value;
+					this.SendPropertyChanged("valor");
+					this.OnvalorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_item", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_item
+		{
+			get
+			{
+				return this._id_item;
+			}
+			set
+			{
+				if ((this._id_item != value))
+				{
+					this.Onid_itemChanging(value);
+					this.SendPropertyChanging();
+					this._id_item = value;
+					this.SendPropertyChanged("id_item");
+					this.Onid_itemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="produto_tb_itens_venda", Storage="_produto", ThisKey="id_produto", OtherKey="id_produto", IsForeignKey=true)]
+		public produto produto
+		{
+			get
+			{
+				return this._produto.Entity;
+			}
+			set
+			{
+				produto previousValue = this._produto.Entity;
 				if (((previousValue != value) 
-							|| (this._Categoria.HasLoadedOrAssignedValue == false)))
+							|| (this._produto.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Categoria.Entity = null;
-						previousValue.Produto.Remove(this);
+						this._produto.Entity = null;
+						previousValue.tb_itens_venda.Remove(this);
 					}
-					this._Categoria.Entity = value;
+					this._produto.Entity = value;
 					if ((value != null))
 					{
-						value.Produto.Add(this);
-						this._CodigoCategoria = value.Codigo;
+						value.tb_itens_venda.Add(this);
+						this._id_produto = value.id_produto;
 					}
 					else
 					{
-						this._CodigoCategoria = default(Nullable<int>);
+						this._id_produto = default(int);
 					}
-					this.SendPropertyChanged("Categoria");
+					this.SendPropertyChanged("produto");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_venda_tb_itens_venda", Storage="_tb_venda", ThisKey="id_venda", OtherKey="id_venda", IsForeignKey=true)]
+		public tb_venda tb_venda
+		{
+			get
+			{
+				return this._tb_venda.Entity;
+			}
+			set
+			{
+				tb_venda previousValue = this._tb_venda.Entity;
+				if (((previousValue != value) 
+							|| (this._tb_venda.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tb_venda.Entity = null;
+						previousValue.tb_itens_venda.Remove(this);
+					}
+					this._tb_venda.Entity = value;
+					if ((value != null))
+					{
+						value.tb_itens_venda.Add(this);
+						this._id_venda = value.id_venda;
+					}
+					else
+					{
+						this._id_venda = default(int);
+					}
+					this.SendPropertyChanged("tb_venda");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_venda")]
+	public partial class tb_venda : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_venda;
+		
+		private System.Nullable<decimal> _valor;
+		
+		private System.Nullable<decimal> _desconto;
+		
+		private System.Nullable<decimal> _valor_pago;
+		
+		private System.Nullable<int> _id_pessoa;
+		
+		private EntitySet<tb_itens_venda> _tb_itens_venda;
+		
+		private EntityRef<tb_pessoa> _tb_pessoa;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_vendaChanging(int value);
+    partial void Onid_vendaChanged();
+    partial void OnvalorChanging(System.Nullable<decimal> value);
+    partial void OnvalorChanged();
+    partial void OndescontoChanging(System.Nullable<decimal> value);
+    partial void OndescontoChanged();
+    partial void Onvalor_pagoChanging(System.Nullable<decimal> value);
+    partial void Onvalor_pagoChanged();
+    partial void Onid_pessoaChanging(System.Nullable<int> value);
+    partial void Onid_pessoaChanged();
+    #endregion
+		
+		public tb_venda()
+		{
+			this._tb_itens_venda = new EntitySet<tb_itens_venda>(new Action<tb_itens_venda>(this.attach_tb_itens_venda), new Action<tb_itens_venda>(this.detach_tb_itens_venda));
+			this._tb_pessoa = default(EntityRef<tb_pessoa>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_venda", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_venda
+		{
+			get
+			{
+				return this._id_venda;
+			}
+			set
+			{
+				if ((this._id_venda != value))
+				{
+					this.Onid_vendaChanging(value);
+					this.SendPropertyChanging();
+					this._id_venda = value;
+					this.SendPropertyChanged("id_venda");
+					this.Onid_vendaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_valor", DbType="Decimal(15,2)")]
+		public System.Nullable<decimal> valor
+		{
+			get
+			{
+				return this._valor;
+			}
+			set
+			{
+				if ((this._valor != value))
+				{
+					this.OnvalorChanging(value);
+					this.SendPropertyChanging();
+					this._valor = value;
+					this.SendPropertyChanged("valor");
+					this.OnvalorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_desconto", DbType="Decimal(15,2)")]
+		public System.Nullable<decimal> desconto
+		{
+			get
+			{
+				return this._desconto;
+			}
+			set
+			{
+				if ((this._desconto != value))
+				{
+					this.OndescontoChanging(value);
+					this.SendPropertyChanging();
+					this._desconto = value;
+					this.SendPropertyChanged("desconto");
+					this.OndescontoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_valor_pago", DbType="Decimal(15,2)")]
+		public System.Nullable<decimal> valor_pago
+		{
+			get
+			{
+				return this._valor_pago;
+			}
+			set
+			{
+				if ((this._valor_pago != value))
+				{
+					this.Onvalor_pagoChanging(value);
+					this.SendPropertyChanging();
+					this._valor_pago = value;
+					this.SendPropertyChanged("valor_pago");
+					this.Onvalor_pagoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_pessoa", DbType="Int")]
+		public System.Nullable<int> id_pessoa
+		{
+			get
+			{
+				return this._id_pessoa;
+			}
+			set
+			{
+				if ((this._id_pessoa != value))
+				{
+					if (this._tb_pessoa.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_pessoaChanging(value);
+					this.SendPropertyChanging();
+					this._id_pessoa = value;
+					this.SendPropertyChanged("id_pessoa");
+					this.Onid_pessoaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_venda_tb_itens_venda", Storage="_tb_itens_venda", ThisKey="id_venda", OtherKey="id_venda")]
+		public EntitySet<tb_itens_venda> tb_itens_venda
+		{
+			get
+			{
+				return this._tb_itens_venda;
+			}
+			set
+			{
+				this._tb_itens_venda.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_pessoa_tb_venda", Storage="_tb_pessoa", ThisKey="id_pessoa", OtherKey="id_pessoa", IsForeignKey=true)]
+		public tb_pessoa tb_pessoa
+		{
+			get
+			{
+				return this._tb_pessoa.Entity;
+			}
+			set
+			{
+				tb_pessoa previousValue = this._tb_pessoa.Entity;
+				if (((previousValue != value) 
+							|| (this._tb_pessoa.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tb_pessoa.Entity = null;
+						previousValue.tb_venda.Remove(this);
+					}
+					this._tb_pessoa.Entity = value;
+					if ((value != null))
+					{
+						value.tb_venda.Add(this);
+						this._id_pessoa = value.id_pessoa;
+					}
+					else
+					{
+						this._id_pessoa = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tb_pessoa");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tb_itens_venda(tb_itens_venda entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb_venda = this;
+		}
+		
+		private void detach_tb_itens_venda(tb_itens_venda entity)
+		{
+			this.SendPropertyChanging();
+			entity.tb_venda = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_usuario")]
+	public partial class tb_usuario : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _usuario;
+		
+		private string _senha;
+		
+		private int _id_pessoa;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnusuarioChanging(string value);
+    partial void OnusuarioChanged();
+    partial void OnsenhaChanging(string value);
+    partial void OnsenhaChanged();
+    partial void Onid_pessoaChanging(int value);
+    partial void Onid_pessoaChanged();
+    #endregion
+		
+		public tb_usuario()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usuario", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string usuario
+		{
+			get
+			{
+				return this._usuario;
+			}
+			set
+			{
+				if ((this._usuario != value))
+				{
+					this.OnusuarioChanging(value);
+					this.SendPropertyChanging();
+					this._usuario = value;
+					this.SendPropertyChanged("usuario");
+					this.OnusuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_senha", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string senha
+		{
+			get
+			{
+				return this._senha;
+			}
+			set
+			{
+				if ((this._senha != value))
+				{
+					this.OnsenhaChanging(value);
+					this.SendPropertyChanging();
+					this._senha = value;
+					this.SendPropertyChanged("senha");
+					this.OnsenhaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_pessoa", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id_pessoa
+		{
+			get
+			{
+				return this._id_pessoa;
+			}
+			set
+			{
+				if ((this._id_pessoa != value))
+				{
+					this.Onid_pessoaChanging(value);
+					this.SendPropertyChanging();
+					this._id_pessoa = value;
+					this.SendPropertyChanged("id_pessoa");
+					this.Onid_pessoaChanged();
 				}
 			}
 		}
